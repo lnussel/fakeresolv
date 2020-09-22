@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "${0#/}" = "$0" -a "${0#./}" = "$0" ]; then
+        dir="$PWD"
+else
+        dir=${0%/*}
+fi
+
+export LD_PRELOAD="$dir/fakeresolv.so"
+
+exec "$@"
