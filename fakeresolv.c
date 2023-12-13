@@ -55,7 +55,9 @@ FILE* fopen64(const char* path, const char* mode)
 	GET_NEXTADDR(fopen64);
 
 	if (!strcmp(path, "/etc/resolv.conf")) {
-		path = "/etc/resolv.conf.qemu";
+		const char* p = getenv("RESOLV_CONF");
+		if (p)
+			path = p;
 	}
 
 	return real_fopen64(path, mode);
